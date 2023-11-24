@@ -16,3 +16,11 @@ resource "aws_s3_bucket" "tf_state_staging" {
     prevent_destroy = true
   }
 }
+
+resource "aws_s3_bucket" "staging_api_builds" {
+  bucket = "feedoong-staging-api-builds"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
