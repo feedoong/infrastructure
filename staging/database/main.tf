@@ -54,19 +54,6 @@ resource "aws_security_group" "rds_security_group" {
   }
 }
 
-resource "aws_security_group_rule" "ssh_ingress" {
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  security_group_id = aws_security_group.rds_security_group.id
-  source_security_group_id = data.terraform_remote_state.ec2.outputs.api_security_group_id
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 resource "aws_security_group_rule" "rds_ingress_from_api" {
   type              = "ingress"
   from_port         = 3306
