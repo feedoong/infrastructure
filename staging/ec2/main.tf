@@ -6,25 +6,6 @@ provider "aws" {
   profile = "bigfanoftim"
 }
 
-#######################################################
-### Data
-#######################################################
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["al2023-ami-2023.1.20230825.0-kernel-6.1-arm64"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["137112412989"]
-}
-
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config  = {
@@ -87,7 +68,7 @@ resource "aws_security_group_rule" "all_traffic_egress" {
 }
 
 resource "aws_instance" "api_1" {
-  ami                         = data.aws_ami.ubuntu.id
+  ami                         = "ami-033e7d0a847ade1d8" // amazon linux 2023
   instance_type               = "t4g.micro"
   associate_public_ip_address = true
   key_name                    = "feedoong"
