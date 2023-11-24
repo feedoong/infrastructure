@@ -40,7 +40,7 @@ resource "aws_codedeploy_app" "ec2" {
 resource "aws_codedeploy_deployment_group" "group" {
   app_name               = aws_codedeploy_app.ec2.name
   deployment_group_name  = "FeedoongStagingAPIDeploymentGroup"
-  service_role_arn       = data.terraform_remote_state.iam_role.outputs.code_deploy_iam_role_arn
+  service_role_arn       = data.terraform_remote_state.iam_role.outputs.codedeploy_iam_role_arn
 
   ec2_tag_filter {
     key   = "Environment"
